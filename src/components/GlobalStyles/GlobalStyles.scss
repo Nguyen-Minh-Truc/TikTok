@@ -18,3 +18,8 @@ body{
     line-height: 1.5;
     text-rendering: optimizeLegibility;
 }
+
+button, input, [tabindex] {
+    outline: none;
+    border: none;
+}

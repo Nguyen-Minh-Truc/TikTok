@@ -1,22 +1,71 @@
-
-
 import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
 
-
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-
+import {
+    faEllipsisVertical,
+    faEarthAsia,
+    faCircleQuestion,
+    faKeyboard,
+    faCloudUpload,
+    faMessage,
+} from '@fortawesome/free-solid-svg-icons';
 
 import Button from '~/components/Button';
 import Menu from '~/components/Popper/Menu';
 import Search from './Search';
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
+import MenuItem from '~/components/Popper/Menu/MenuItem';
 
 const cx = classNames.bind(styles);
+
+const currentUser = true;
+
+const MENU_ITEMS = [
+    {
+        icon: <FontAwesomeIcon icon={faEarthAsia} />,
+        title: 'English',
+    },
+    {
+        icon: <FontAwesomeIcon icon={faCircleQuestion} />,
+        title: 'Feedback and help',
+        to: '/feedback',
+    },
+    {
+        icon: <FontAwesomeIcon icon={faKeyboard} />,
+        title: 'Keyboard shortcuts',
+    },
+];
+
+const user__menu = [
+    {
+        icon: <FontAwesomeIcon icon={faKeyboard} />,
+        title: 'Keyboard shortcuts',
+    },
+    {
+        icon: <FontAwesomeIcon icon={faKeyboard} />,
+        title: 'Keyboard shortcuts',
+    },
+    {
+        icon: <FontAwesomeIcon icon={faKeyboard} />,
+        title: 'Keyboard shortcuts',
+    },
+
+    ...MENU_ITEMS,
+];
+
+const handleMenuChang = (menuItem) => {
+    switch (menuItem.type) {
+        case 'language':
+            break;
+
+        default:
+            break;
+    }
+};
 function Header() {
-  
     return (
         <header className={cx('wrapper')}>
             <div className={cx('content')}>
@@ -61,18 +110,43 @@ function Header() {
                     </svg>
                 </div>
 
-              <Search/>
+                <Search />
 
                 <div className={cx('action')}>
-                    <Button text>Upload</Button>
-                    <Button primary>Log in</Button>
+                    {currentUser ? (
+                        <>
+                            <Tippy content=" UpLoad Video" placement="bottom">
+                                <button className={cx('action__btn')}>
+                                    <FontAwesomeIcon icon={faCloudUpload} />
+                                </button>
+                            </Tippy>
+                            <Tippy content="Message" placement="bottom">
+                                <button className={cx('action__btn')}>
+                                    <FontAwesomeIcon icon={faMessage} />
+                                </button>
+                            </Tippy>
+                        </>
+                    ) : (
+                        <>
+                            <Button text>Upload</Button>
+                            <Button primary>Log in</Button>
+                        </>
+                    )}
 
-                    <Menu>
-                        <button className={cx('more_btn')}>
-                            <FontAwesomeIcon icon={faEllipsisVertical} />
-                        </button>
+                    <Menu items={currentUser ? user__menu : MENU_ITEMS} onChange={handleMenuChang}>
+                        {currentUser ? (
+                            <>
+                                <img
+                                    src="https://p16-sign-useast2a.tiktokcdn.com/tos-useast2a-avt-0068-giso/ec420eed41c3934a1f9b86d3903a61f6~c5_100x100.jpeg?x-expires=1701266400&x-signature=pI5T0rr6vPDTvNktk%2FeJmzHjkSI%3D"
+                                    className={cx('user__avarta')}
+                                />
+                            </>
+                        ) : (
+                            <button className={cx('more_btn')}>
+                                <FontAwesomeIcon icon={faEllipsisVertical} />
+                            </button>
+                        )}
                     </Menu>
-                    
                 </div>
             </div>
         </header>

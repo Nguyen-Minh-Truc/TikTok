@@ -12,19 +12,39 @@
     justify-content: space-between;
 }
 
-.action {
-    display: flex;
-    align-items: center;
-}
 .acount__title {
     font-size: 1.4rem;
     color:rgba(22, 24, 35, 0.5); 
     font-weight: 600;
     padding: 5px 12px;
 }
+
+.action {
+    display: flex;
+    align-items: center;
+
+    &__btn {
+        font-size: 22px;
+        padding:4px 12px;
+        background-color: transparent;
+        color: #161823;
+        cursor: pointer;
+    }
+}
+.user__avarta{
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    border-radius: 9999px;
+    margin-left: 12px;
+}
+
+
+
 .more_btn {
     margin-left: 28px;
     font-size: 2rem;
     background: transparent;
     padding: 1px 8px;
+
 }

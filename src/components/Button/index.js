@@ -17,6 +17,7 @@ function Button({
     small = false,
     large = false,
     className,
+    leftIcon,
 
     onClick,
 }) {
